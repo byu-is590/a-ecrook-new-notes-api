@@ -1,0 +1,87 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'jacoco'
+    id "org.flywaydb.flyway" version "8.2.0"
+}
+
+group = 'edu.byu.is590r'
+version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+ext {
+    jacocoVersion = '0.8.7'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'commons-codec:commons-codec'
+    implementation 'mysql:mysql-connector-java:8.0.25'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+
+jacoco {
+    toolVersion = jacocoVersion
+}
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.enabled true
+        csv.enabled true
+        html.enabled true
+    }
+    finalizedBy jacocoTestCoverageVerification
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            enabled = false
+            limit {
+                minimum = 0.2
+            }
+        }
+    }
+}
+
+flyway {
+    url = 'jdbc:mysql://is590r-01.cbyw5xk6upzj.us-west-2.rds.amazonaws.com:3306'
+    user = 'root'
+    password = 'is590r-123!'
+    schemas = ['notes_ecrook']
+    defaultSchema = 'notes_ecrook'
+}
+dockerRun {
+    name 'notes-mysql'
+    image 'mysql:latest'
+    ports '3306:3306'
+    //Can change password to whatever I need, but keep it consistent
+    env 'MYSQL_ROOT_PASSWORD': 'mypass'
+    //default is false, the reason we say its true is cuz we want it to reset our environment every time
+    clean true
+}
