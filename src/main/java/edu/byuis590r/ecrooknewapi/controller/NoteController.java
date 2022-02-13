@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 /***
  * class for user controller
  * Update with more details
- * Milestone 4
+ * Milestone 4 yes
  */
 @RequestMapping("/v1")
 @RestController
