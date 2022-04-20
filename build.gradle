@@ -83,10 +83,13 @@ flyway {
 }
 /***
 dockerRun {
+    //make sure to name docker file this name
     name 'notes-mysql'
+ //Image comes from hub.docker.com for mysql
     image 'mysql:latest'
+ // port on the host : port on the container. THEY MUST MATCH!
     ports '3306:3306'
-    //Can change password to whatever I need, but keep it consistent
+    //Default password. Can change password to whatever I need, but keep it consistent
     //env 'MYSQL_ROOT_PASSWORD': 'mypass'
     env 'MYSQL_ROOT_PASSWORD': 'password'
     //default is false, the reason we say its true is cuz we want it to reset our environment every time
