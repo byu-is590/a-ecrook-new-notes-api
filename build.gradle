@@ -9,7 +9,7 @@ plugins {
 
 group = 'edu.byu.is590r.ecrook'
 version = '0.0.1-SNAPSHOT'
-//sourceCompatibility = '11'
+sourceCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -36,6 +36,7 @@ dependencies {
     implementation 'commons-codec:commons-codec'
     implementation 'mysql:mysql-connector-java:8.0.28'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.7'
+    runtimeOnly 'mysql:mysql-connector-java'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     annotationProcessor 'org.projectlombok:lombok'
@@ -76,7 +77,7 @@ jacocoTestCoverageVerification {
 flyway {
     url = 'jdbc:mysql://is590r-01.cbyw5xk6upzj.us-west-2.rds.amazonaws.com:3306'
     user = 'root'
-    password = 'is590r-123!'
+    password = 'mypass'
     schemas = ['notes_ecrook']
     defaultSchema = 'notes_ecrook'
 }

@@ -16,8 +16,8 @@ import javax.validation.constraints.NotEmpty;
 
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotEmpty(message = "first name is required")
     @NonNull
