@@ -92,3 +92,8 @@ dockerRun {
     clean true
 }
  */
+
+tasks.named("test") {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
