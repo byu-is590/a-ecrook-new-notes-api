@@ -27,22 +27,22 @@ public class DummyUserServiceImpl implements UserService {
         return String.format("Hello, %s, from the User Service", userId);
     }
 
-    @Override
-    public Optional<User> getUseByEmail(String email) {
-        var user = userRepository.findFirstByEmail(email);
-        return user;
-    }
-
-    @Override
-    public User saveUser(User user) {
-        user.setCreatedAt(Instant.now());
-        user.setPasswordHash(DigestUtils.sha256Hex(user.getPassword() + salt));
-        return userRepository.save(user);
-    }
-
-    @Override
-    public boolean validateUserByEmail(String email) {
-        Optional<User> existingUser = userRepository.findFirstByEmail(email);
-        return existingUser.isPresent() ? true : false;
-    }
+//    @Override
+//    public Optional<User> getUseByEmail(String email) {
+//        var user = userRepository.findFirstByEmail(email);
+//        return user;
+//    }
+//
+//    @Override
+//    public User saveUser(User user) {
+//        user.setCreatedAt(Instant.now());
+//        user.setPasswordHash(DigestUtils.sha256Hex(user.getPassword() + salt));
+//        return userRepository.save(user);
+//    }
+//
+//    @Override
+//    public boolean validateUserByEmail(String email) {
+//        Optional<User> existingUser = userRepository.findFirstByEmail(email);
+//        return existingUser.isPresent() ? true : false;
+//    }
 }

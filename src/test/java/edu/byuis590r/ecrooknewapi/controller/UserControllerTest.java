@@ -9,12 +9,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.util.Assert;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @ActiveProfiles("test")
@@ -47,7 +44,7 @@ class UserControllerTest {
         //Call 'when', pass in userService to pass in SomeId to getUserById. Return mock userName
         Mockito.when(userService.getUserById("SomeId")).thenReturn("Mock user name");
         //getUser is calling UserController, then userService. No instance is made
-        String testName = userController.getUser("SomeId");
+        String testName = userController.getUserById("SomeId");
         //Assert conditions are true. If false, throw exception
         Assertions.assertEquals("Mock user name", testName);
     }
